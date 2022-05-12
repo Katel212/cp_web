@@ -1,0 +1,66 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&amp;display=swap"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'catalog/images/favicon.png' %}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&amp;display=swap" media="print"
+          onload="this.media='all'"/>
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&amp;display=swap"/>
+    </noscript>
+    <link href='{%static "catalog/css/bootstrap.min.css"%}' rel="stylesheet">
+    <link href='{%static "catalog/css/font-awesome/css/all.min.css"%}' rel="stylesheet">
+    <link href='{%static "catalog/css/main.css"%}' rel="stylesheet">
+    {% block title %} {% endblock %}
+</head>
+<body>
+<div class="page">
+    <header>
+        <div class="pp-header">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container"><a href="{% url 'index' %}"><img src='{% static "catalog/images/favicon.png"%}' alt="Logo"></a>
+                    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="{% url 'index' %}" class="nav-link px-2 link-secondary">Каталог</a></li>
+                        <li><a href="#" class="nav-link px-2 link-dark">Доставка и оплата</a></li>
+                        <li><a href="#" class="nav-link px-2 link-dark">Корзина</a></li>
+                        <li><a href="#" class="nav-link px-2 link-dark">О нас</a></li>
+                    </ul>
+
+                    <div class="col-md-1 text-end">
+                        <button type="button" class="btn btn-outline-primary me-2">Личный кабинет</button>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="page-content">
+        <div class="container">
+            <div class="container pp-section">
+                <div class="row">
+                    <div class="col-md-9 col-sm-12 px-0">
+                        {%block head%}{%endblock%}
+                    </div>
+                </div>
+            </div>
+            {%block content%}{%endblock%}
+        </div>
+    </div>
+</div>
+<footer class="pp-footer">
+    <div class="container py-5">
+        <div class="row text-center">
+            <div class="col-md-12"><a class="pp-instagram btn btn-link" href="https://www.instagram.com/chocolate.palette_"><i
+                    class="fab fa-instagram fa-2x " aria-hidden="true"></i></a></div>
+        </div>
+    </div>
+</footer>
+<script src='{%static "catalog/scripts/jquery.min.js"%}'></script>
+<script src='{%static "catalog/scripts/bootstrap.bundle.min.js"%}'></script>
+<script src='{%static "catalog/scripts/main.js"%}'></script>
+</body>
+</html>
