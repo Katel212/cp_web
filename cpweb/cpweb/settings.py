@@ -50,10 +50,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cpweb.urls'
 
+LOGIN_REDIRECT_URL = '/'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [Path.joinpath(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,6 +126,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = Path.joinpath(BASE_DIR, "static")
 
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'image')
+
+MEDIA_URL = '/image/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -1,27 +1,24 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
-class User(models.Model):
-    login = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
-
+class MyUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=12)
     def __str__(self):
-        return self.login
-
-    def get_absolute_url(self):
-        return reverse('user-detail', args=[str(self.id)])
-
+        return str(self.name)
 
 class Order(models.Model):
     number = models.IntegerField()
-    due_date = models.DateField()
-    price = models.FloatField()
+    due_date = models.DateField(null=True)
+    price = models.FloatField(null=True)
     status = models.CharField(max_length=20)
-    id_user = models.ForeignKey('User', models.PROTECT)
+    id_user = models.ForeignKey(User, models.PROTECT)
+    order_date = models.DateField(null=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse('order-detail', args=[str(self.id)])
@@ -31,32 +28,34 @@ class OrderComposition(models.Model):
     id_order = models.ForeignKey('Order', models.PROTECT)
     quantity = models.IntegerField()
     id_product = models.ForeignKey('Product', on_delete=models.PROTECT)
+    filling = models.CharField(max_length=100, default='')
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
     price = models.FloatField()
     create_time = models.CharField(max_length=20)
-    img = models.ImageField(null=True)
+    img = models.ImageField(upload_to='media', null=True)
+    count = models.CharField(max_length=20, null=True)
+    description = models.TextField(default='')
     status = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse('order-detail', args=[str(self.id)])
 
 
 class Taste(models.Model):
-    filling = models.CharField(max_length=50)
-    img = models.ImageField(null=True)
+    filling = models.CharField(max_length=100)
     id_product = models.ForeignKey('Product', on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse('order-detail', args=[str(self.id)])
