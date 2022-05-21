@@ -1,0 +1,53 @@
+{%extends "catalog/base.html"%}
+{% load static %}
+
+{% block title %}<title>Личный кабинет</title>{%endblock%}
+{%block head%}<h1 class="h1">Личный кабинет</h1>{%endblock%}
+{% block content %}
+              <div class="lk-credentials">
+                  <div class="lk-name">
+                      Имя: {{user.first_name}}<br>
+
+                  </div>
+                  <div class="lk-phone">
+                      Номер телефона: {{my_user.phone}}<br>
+                  </div>
+                  <div class="lk-mail">
+                      Электронная почта: {{user.email}}<br>
+                  </div>
+              </div>
+              <div class="lk-orders">
+                <div class="lk-one-order-table">
+                    {% for order in orders %}
+                  <div class="top-table">
+                      <div class="lk-number-order">
+                          Заказ №{{order.number}}
+                      </div>
+                      <div class="lk-status-order">
+                          Статус {{order.status}}
+                      </div>
+                  </div>
+                  <div class="lk-rows-orders">
+                      {% for comp in compositions %}
+                      {% if comp.id_order.id == order.id %}
+                      <div class="lk-rows-orders-1">
+                          {% for product in products %}
+                          {% if comp.id_product.id == product.id %}
+                          {{ product.name }}
+                          {% endif %}
+                          {% endfor %}
+                      </div>
+                      <div class="lk-rows-orders-2">
+                          {{ comp.quantity }}
+                      </div>
+                      <div class="lk-rows-orders-3">
+                          {{comp.price}}
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                  </div>
+                    {% endfor %}
+
+                </div>
+              </div>
+{% endblock %}

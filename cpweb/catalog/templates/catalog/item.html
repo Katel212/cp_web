@@ -24,21 +24,8 @@
         console.log("+ triggered");
         return false;
     }
-
 </script>
-<script type="text/javascript">
-<!--$('body').on('input', '.buy-count', function(){-->
-<!--var value = this.value.replace(/[^0-9]/g, '');-->
-<!--if (value < $(this).data('min')) {-->
-<!--this.value = $(this).data('min');-->
-<!--} else if (value > $(this).data('max')) {-->
-<!--this.value = $(this).data('max');-->
-<!--} else {-->
-<!--this.value = value;-->
-<!--}-->
-<!--});-->
 
-</script>
 
 {%endblock%}
 {%block head%}<h1 class="h1">{{product.name}}</h1>{%endblock%}
@@ -50,7 +37,7 @@
             {{product.description}}
         </div>
         <div class="dish-cook">Срок изготовления: {{product.create_time}}</div>
-        <form action="" method="post">
+        <form action="" method="post" onclick="event.stopImmediatePropagation()">
             {% csrf_token %}
             <div class="buy-extended">
                 <div class="dish-price">Цена: {{product.price}} ₽</div>

@@ -1,0 +1,74 @@
+            <!-- Начало основного контента -->
+            {%extends "catalog/base.html"%}
+            {% load static %}
+
+            {% block title %}<title>Корзина Chocolate palette</title>{%endblock%}
+            {%block head%}<h1 class="h1">Корзина</h1>{%endblock%}
+            {% block content %}
+            <div class="my-order">
+                <div class="order-items">
+                    <div class="nav-order">
+                        <div class="nav-order-1"><div class="nav-order-text">Состав заказа</div></div>
+                        <div class="nav-order-2"><div class="nav-order-text">Количество</div></div>
+                        <div class="nav-order-3"><div class="nav-order-text">Цена</div></div>
+                    </div>
+
+            {% for comp in compositions %}
+            <div class="row-order">
+            <div class="row-order-1-1">
+            <div class="row-order-1">            
+                <div class="row-order-photo">тут фото</div>
+            </div>
+            <div class="row-order-2">            
+                <div class="row-order-name">{% for product in products %}
+                    {% if comp.id_product.id == product.id %}
+                    {{ product.name }}
+                    {% endif %}
+                    {% endfor %}</div>
+            </div>
+            </div>
+            <div class="row-order-3">            
+                <div class="row-order-count">{{ comp.quantity }}</div>
+            </div>
+            <div class="row-order-4">            
+                <div class="row-order-final">{{ comp.quantity * comp.price }}</div>
+                <div class="cl-btn-2">
+                    <div>
+                        <div class="leftright"></div>
+                        <div class="rightleft"></div>
+                        <span class="close-btn"></span>
+                    </div>
+                </div>
+            </div>
+            </div>
+                    {% endfor %}
+
+            <!-- {end for} -->
+            </div>
+            <div class="credentials">
+                <div style="max-width: 300px; margin-right: 1em;">
+                    Оставьте ваши данные, чтобы мы могли с вами связаться:<br>
+                </div>
+                <div class="credentials-m">
+                    <div class="name">
+                    Имя:
+                    <input class="name-to" style="width:200px"></input>
+                </div>
+                <div class="phone">
+                    Телефон:
+                    <input class="phone-to" style="width:200px"></input>
+                </div>
+                <div class="mail">
+                    Почта:
+                    <input class="mail-to" style="width:200px"></input>
+                </div>
+                </div>
+            </div>
+            <div class="funal-sum">
+                <div class="funal-sum-count">Итоговая сумма: {{sum}}</div>
+                <div class="final-button">
+                <button class="final-button-button" type="submit">Оформить заказ</button>
+                </div>
+            </div>
+            </div>
+            {%endblock%}

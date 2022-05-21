@@ -1,0 +1,9 @@
+{%extends "catalog/base.html"%}
+{% load static %}
+
+{% block title %}<title>Chocolate palette</title>{%endblock%}
+{%block head%}<h1 class="h1">Продукт "{{product.name}}" успешно добавлен в корзину</h1>{%endblock%}
+{% block content %}
+<li><a href="{% url 'home' %}" class="nav-link px-2 link-secondary">Вернуться к каталогу</a></li>
+<li><a href="{% url 'cart' %}" class="nav-link px-2 link-secondary">Перейти в корзину</a></li>
+{% endblock %}
